@@ -28,7 +28,8 @@ def callback(request):
 
     if user.is_anonymous():
         #we have to set this user up
-        url = reverse('facebook_setup')
+        url = reverse(getattr(settings,
+            'FACEBOOK_SETUP_URLNAME', 'facebook_setup'))
         url += "?code=%s" % code
         resp = HttpResponseRedirect(url)
     else:
